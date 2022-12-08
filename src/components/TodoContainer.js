@@ -10,6 +10,13 @@ import NotMatch from '../pages/NotMatch';
 import Navbar from './Navbar';
 
 const TodoContainer = () => {
+  function getInitialTodos() {
+    // getting stored items
+    const temp = localStorage.getItem('todos');
+    const savedTodos = JSON.parse(temp);
+    return savedTodos || [];
+  }
+
   const [todos, setTodos] = useState(getInitialTodos());
 
   // useEffect(() => {
@@ -27,13 +34,6 @@ const TodoContainer = () => {
     const temp = JSON.stringify(todos);
     localStorage.setItem('todos', temp);
   }, [todos]);
-
-  function getInitialTodos() {
-    // getting stored items
-    const temp = localStorage.getItem('todos');
-    const savedTodos = JSON.parse(temp);
-    return savedTodos || [];
-  }
 
   const handleChange = (id) => {
     setTodos((prevState) => prevState.map((todo) => {
@@ -65,7 +65,8 @@ const TodoContainer = () => {
     setTodos(
       todos.map((todo) => {
         if (todo.id === id) {
-          todo.title = updatedTitle;
+          const itemTodo = todo;
+          itemTodo.title = updatedTitle;
         }
         return todo;
       }),
