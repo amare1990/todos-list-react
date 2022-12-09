@@ -1,17 +1,18 @@
 import React from 'react';
 import TodoItem from './TodoItem';
 
-const TodosList = (props) => {
-  const { todos } = props;
-  (
+const TodosList = (prop) => {
+  const { todos } = prop;
+  const { handleChangeProps, deleteTodoProps, setUpdate } = prop;
+  return (
     <ul>
       {todos.map((todo) => (
         <TodoItem
           key={todo.id}
           todo={todo}
-          handleChangeProps={props.handleChangeProps}
-          deleteTodoProps={props.deleteTodoProps}
-          setUpdate={props.setUpdate}
+          handleChangeProps={handleChangeProps}
+          deleteTodoProps={deleteTodoProps}
+          setUpdate={setUpdate}
         />
       ))}
     </ul>
